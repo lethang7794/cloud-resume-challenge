@@ -2,16 +2,50 @@ AWSTemplateFormatVersion: '2010-09-09-OC'
 Description: default template generated for organization with master account 062654312577
 
 Organization:
-  ManagementAccount:
+  MasterAccount:
     Type: OC::ORG::MasterAccount
     Properties:
+      Alias: ethanle000001-root-user
+      RootEmail: ethanle000001@email.com
       AccountName: Ethan
       AccountId: '062654312577'
-      RootEmail: ethanle000001@gmail.com
+      Tags:
+        budget-alarm-threshold: '10'
+        account-owner-email: ethanle000001+master@gmail.com
 
   OrganizationRoot:
     Type: OC::ORG::OrganizationRoot
     Properties:
       DefaultOrganizationAccessRoleName: OrganizationAccountAccessRole
 
+  ProductionAccount:
+    Type: OC::ORG::Account
+    Properties:
+      RootEmail: ethanle000001+production@gmail.com
+      AccountName: Production Account
+      Tags:
+        budget-alarm-threshold: '10'
+        account-owner-email: ethanle000001+master@gmail.com
 
+  DevelopmentAccount:
+    Type: OC::ORG::Account
+    Properties:
+      RootEmail: ethanle000001+development@gmail.com
+      AccountName: Development Account
+      Tags:
+        budget-alarm-threshold: '10'
+        account-owner-email: ethanle000001+master@gmail.com
+
+  DevelopmentOU:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: development
+      Accounts:
+        - !Ref DevelopmentAccount
+
+  ProductionOU:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: production
+      Accounts:
+        - !Ref ProductionAccount
