@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09-OC'
+AWSTemplateFormatVersion: "2010-09-09-OC"
 Description: default template generated for organization with master account 062654312577
 
 Organization:
@@ -8,9 +8,9 @@ Organization:
       Alias: ethanle000001-root-user
       RootEmail: ethanle000001@email.com
       AccountName: Ethan
-      AccountId: '062654312577'
+      AccountId: "062654312577"
       Tags:
-        budget-alarm-threshold: '10'
+        budget-alarm-threshold: "10"
         account-owner-email: ethanle000001+master@gmail.com
 
   OrganizationRoot:
@@ -18,22 +18,31 @@ Organization:
     Properties:
       DefaultOrganizationAccessRoleName: OrganizationAccountAccessRole
 
-  ProductionAccount:
-    Type: OC::ORG::Account
-    Properties:
-      RootEmail: ethanle000001+production@gmail.com
-      AccountName: Production Account
-      Tags:
-        budget-alarm-threshold: '10'
-        account-owner-email: ethanle000001+master@gmail.com
-
   DevelopmentAccount:
     Type: OC::ORG::Account
     Properties:
       RootEmail: ethanle000001+development@gmail.com
       AccountName: Development Account
       Tags:
-        budget-alarm-threshold: '10'
+        budget-alarm-threshold: "10"
+        account-owner-email: ethanle000001+master@gmail.com
+
+  TestingAccount:
+    Type: OC::ORG::Account
+    Properties:
+      RootEmail: ethanle000001+testing@gmail.com
+      AccountName: Testing Account
+      Tags:
+        budget-alarm-threshold: "10"
+        account-owner-email: ethanle000001+master@gmail.com
+
+  ProductionAccount:
+    Type: OC::ORG::Account
+    Properties:
+      RootEmail: ethanle000001+production@gmail.com
+      AccountName: Production Account
+      Tags:
+        budget-alarm-threshold: "10"
         account-owner-email: ethanle000001+master@gmail.com
 
   DevelopmentOU:
@@ -42,6 +51,13 @@ Organization:
       OrganizationalUnitName: development
       Accounts:
         - !Ref DevelopmentAccount
+
+  TestingOU:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: testing
+      Accounts:
+        - !Ref TestingAccount
 
   ProductionOU:
     Type: OC::ORG::OrganizationalUnit
