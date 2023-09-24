@@ -1,0 +1,40 @@
+{
+  "DistributionConfig": {
+    "CallerReference": "my-cloudfront-distribution-cli",
+    "DefaultRootObject": "index.html",
+    "Origins": {
+      "Quantity": 1,
+      "Items": [
+        {
+          "Id": "my-origin-id",
+          "DomainName": "my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com",
+          "S3OriginConfig": {
+            "OriginAccessIdentity": ""
+          },
+          "OriginAccessControlId": "E2FV804DPJZRL0"
+        }
+      ]
+    },
+    "DefaultCacheBehavior": {
+      "TargetOriginId": "my-origin-id",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "Compress": true,
+      "ForwardedValues": {
+        "QueryString": true,
+        "Cookies": {
+          "Forward": "all"
+        },
+        "Headers": {
+          "Quantity": 0
+        },
+        "QueryStringCacheKeys": {
+          "Quantity": 0
+        }
+      },
+      "MinTTL": 3600,
+      "DefaultTTL": 86400
+    },
+    "Comment": "A CloudFront Distribution created with AWS CLI",
+    "Enabled": true
+  }
+}

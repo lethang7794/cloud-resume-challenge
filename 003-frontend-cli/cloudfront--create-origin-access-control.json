@@ -1,0 +1,9 @@
+{
+    "OriginAccessControlConfig": {
+        "Name": "",
+        "Description": "",
+        "SigningProtocol": "sigv4",
+        "SigningBehavior": "never",
+        "OriginAccessControlOriginType": "s3"
+    }
+}

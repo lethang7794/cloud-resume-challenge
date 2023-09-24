@@ -1,0 +1,6 @@
+OriginAccessControlConfig:  # [REQUIRED] Contains the origin access control.
+  Name: ''  # [REQUIRED] A name to identify the origin access control.
+  Description: '' # A description of the origin access control.
+  SigningProtocol: sigv4 # [REQUIRED] The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. Valid values are: sigv4.
+  SigningBehavior: never # [REQUIRED] Specifies which requests CloudFront signs (adds authentication information to). Valid values are: never, always, no-override.
+  OriginAccessControlOriginType: s3 # [REQUIRED] The type of origin that this origin access control is for. Valid values are: s3, mediastore.

@@ -1,0 +1,22 @@
+DistributionConfig:
+  CallerReference: my-cloudfront-distribution-cli # Used to ensure idempotence
+  DefaultRootObject: index.html
+  Origins:
+    Quantity: 1
+    Items:
+      - Id: my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com # It's the Origin name in Web Console
+        DomainName: my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com
+        S3OriginConfig:
+          OriginAccessIdentity: ''
+        OriginAccessControlId: E2FV804DPJZRL0
+  DefaultCacheBehavior:
+    TargetOriginId: my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com
+    ViewerProtocolPolicy: redirect-to-https
+    Compress: true
+    ForwardedValues:
+      QueryString: true
+      Cookies:
+        Forward: all
+    MinTTL: 3600
+  Comment: A CloudFront Distribution created with AWS CLI
+  Enabled: true

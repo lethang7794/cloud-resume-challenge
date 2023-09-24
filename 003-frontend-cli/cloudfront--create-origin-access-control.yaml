@@ -1,0 +1,6 @@
+OriginAccessControlConfig:
+  Name: 'my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com' # <BUCKET NAME>.s3.<REGION>.amazonaws.com
+  Description: 'My Origin Accsee Control - Created from AWS CLI'
+  SigningProtocol: sigv4
+  SigningBehavior: always
+  OriginAccessControlOriginType: s3

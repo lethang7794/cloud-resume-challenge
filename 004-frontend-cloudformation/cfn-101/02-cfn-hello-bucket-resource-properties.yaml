@@ -1,0 +1,7 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/gettingstarted.templatebasics.html#gettingstarted.templatebasics.multiple
+Resources:
+  HelloBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      # AccessControl: PublicRead # Legacy property https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-accesscontrol
+      ObjectLockEnabled: true # The most simple property of a S3 bucket

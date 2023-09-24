@@ -1,0 +1,202 @@
+DistributionConfig:  # [REQUIRED] The distribution's configuration information.
+  CallerReference: ''  # [REQUIRED] A unique value (for example, a date-time stamp) that ensures that the request can't be replayed.
+  Aliases: # A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.
+    Quantity: 0  # [REQUIRED] The number of CNAME aliases, if any, that you want to associate with this distribution.
+    Items: # A complex type that contains the CNAME aliases, if any, that you want to associate with this distribution.
+    - ''
+  DefaultRootObject: '' # The object that you want CloudFront to request from your origin (for example, index.
+  Origins: # [REQUIRED] A complex type that contains information about origins for this distribution.
+    Quantity: 0  # [REQUIRED] The number of origins for this distribution.
+    Items: # [REQUIRED] A liskt of origins.
+    - Id: ''  # [REQUIRED] A unique identifier for the origin.
+      DomainName: '' # [REQUIRED] The domain name for the origin.
+      OriginPath: '' # An optional path that CloudFront appends to the origin domain name when CloudFront requests content from the origin.
+      CustomHeaders: # A list of HTTP header names and values that CloudFront adds to the requests that it sends to the origin.
+        Quantity: 0  # [REQUIRED] The number of custom headers, if any, for this distribution.
+        Items: #  Optional.
+        - HeaderName: ''  # [REQUIRED] The name of a header that you want CloudFront to send to your origin.
+          HeaderValue: '' # [REQUIRED] The value for the header that you specified in the HeaderName field.
+      S3OriginConfig: # Use this type to specify an origin that is an Amazon S3 bucket that is not configured with static website hosting.
+        OriginAccessIdentity: ''  # [REQUIRED] The CloudFront origin access identity to associate with the origin.
+      CustomOriginConfig: # Use this type to specify an origin that is not an Amazon S3 bucket, with one exception.
+        HTTPPort: 0  # [REQUIRED] The HTTP port that CloudFront uses to connect to the origin.
+        HTTPSPort: 0 # [REQUIRED] The HTTPS port that CloudFront uses to connect to the origin.
+        OriginProtocolPolicy: http-only # [REQUIRED] Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are: http-only, match-viewer, https-only.
+        OriginSslProtocols: # Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS.
+          Quantity: 0  # [REQUIRED] The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin.
+          Items: # [REQUIRED] A list that contains allowed SSL/TLS protocols for this distribution.
+          - SSLv3
+        OriginReadTimeout: 0 # Specifies how long, in seconds, CloudFront waits for a response from the origin.
+        OriginKeepaliveTimeout: 0 # Specifies how long, in seconds, CloudFront persists its connection to the origin.
+      ConnectionAttempts: 0 # The number of times that CloudFront attempts to connect to the origin.
+      ConnectionTimeout: 0 # The number of seconds that CloudFront waits when trying to establish a connection to the origin.
+      OriginShield: # CloudFront Origin Shield.
+        Enabled: true  # [REQUIRED] A flag that specifies whether Origin Shield is enabled.
+        OriginShieldRegion: '' # The Amazon Web Services Region for Origin Shield.
+      OriginAccessControlId: '' # The unique identifier of an origin access control for this origin.
+  OriginGroups: # A complex type that contains information about origin groups for this distribution.
+    Quantity: 0  # [REQUIRED] The number of origin groups.
+    Items: # The items (origin groups) in a distribution.
+    - Id: ''  # [REQUIRED] The origin group's ID.
+      FailoverCriteria: # [REQUIRED] A complex type that contains information about the failover criteria for an origin group.
+        StatusCodes:  # [REQUIRED] The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.
+          Quantity: 0  # [REQUIRED] The number of status codes.
+          Items: # [REQUIRED] The items (status codes) for an origin group.
+          - 0
+      Members: # [REQUIRED] A complex type that contains information about the origins in an origin group.
+        Quantity: 0  # [REQUIRED] The number of origins in an origin group.
+        Items: # [REQUIRED] Items (origins) in an origin group.
+        - OriginId: ''  # [REQUIRED] The ID for an origin in an origin group.
+  DefaultCacheBehavior: # [REQUIRED] A complex type that describes the default cache behavior if you don't specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.
+    TargetOriginId: ''  # [REQUIRED] The value of ID for the origin that you want CloudFront to route requests to when they use the default cache behavior.
+    TrustedSigners: #  We recommend using TrustedKeyGroups instead of TrustedSigners.
+      Enabled: true  # [REQUIRED] This field is true if any of the Amazon Web Services accounts in the list are configured as trusted signers.
+      Quantity: 0 # [REQUIRED] The number of Amazon Web Services accounts in the list.
+      Items: # A list of Amazon Web Services account identifiers.
+      - ''
+    TrustedKeyGroups: # A list of key groups that CloudFront can use to validate signed URLs or signed cookies.
+      Enabled: true  # [REQUIRED] This field is true if any of the key groups in the list have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+      Quantity: 0 # [REQUIRED] The number of key groups in the list.
+      Items: # A list of key groups identifiers.
+      - ''
+    ViewerProtocolPolicy: allow-all # [REQUIRED] The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. Valid values are: allow-all, https-only, redirect-to-https.
+    AllowedMethods: # A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+      Quantity: 0  # [REQUIRED] The number of HTTP methods that you want CloudFront to forward to your origin.
+      Items: # [REQUIRED] A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin.
+      - GET
+      CachedMethods: # A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods.
+        Quantity: 0  # [REQUIRED] The number of HTTP methods for which you want CloudFront to cache responses.
+        Items: # [REQUIRED] A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
+        - GET
+    SmoothStreaming: true # Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
+    Compress: true # Whether you want CloudFront to automatically compress certain files for this cache behavior.
+    LambdaFunctionAssociations: # A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.
+      Quantity: 0  # [REQUIRED] The number of Lambda@Edge function associations for this cache behavior.
+      Items: #  Optional.
+      - LambdaFunctionARN: ''  # [REQUIRED] The ARN of the Lambda@Edge function.
+        EventType: viewer-request # [REQUIRED] Specifies the event type that triggers a Lambda@Edge function invocation. Valid values are: viewer-request, viewer-response, origin-request, origin-response.
+        IncludeBody: true # A flag that allows a Lambda@Edge function to have read access to the body content.
+    FunctionAssociations: # A list of CloudFront functions that are associated with this cache behavior.
+      Quantity: 0  # [REQUIRED] The number of CloudFront functions in the list.
+      Items: # The CloudFront functions that are associated with a cache behavior in a CloudFront distribution.
+      - FunctionARN: ''  # [REQUIRED] The Amazon Resource Name (ARN) of the function.
+        EventType: viewer-request # [REQUIRED] The event type of the function, either viewer-request or viewer-response. Valid values are: viewer-request, viewer-response, origin-request, origin-response.
+    FieldLevelEncryptionId: '' # The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.
+    RealtimeLogConfigArn: '' # The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior.
+    CachePolicyId: '' # The unique identifier of the cache policy that is attached to the default cache behavior.
+    OriginRequestPolicyId: '' # The unique identifier of the origin request policy that is attached to the default cache behavior.
+    ResponseHeadersPolicyId: '' # The identifier for a response headers policy.
+    ForwardedValues: # This field is deprecated.
+      QueryString: true  # [REQUIRED] This field is deprecated.
+      Cookies: # [REQUIRED] This field is deprecated.
+        Forward: none  # [REQUIRED] This field is deprecated. Valid values are: none, whitelist, all.
+        WhitelistedNames: # This field is deprecated.
+          Quantity: 0  # [REQUIRED] The number of cookie names in the Items list.
+          Items: # A list of cookie names.
+          - ''
+      Headers: # This field is deprecated.
+        Quantity: 0  # [REQUIRED] The number of header names in the Items list.
+        Items: # A list of HTTP header names.
+        - ''
+      QueryStringCacheKeys: # This field is deprecated.
+        Quantity: 0  # [REQUIRED] The number of whitelisted query string parameters for a cache behavior.
+        Items: # A list that contains the query string parameters that you want CloudFront to use as a basis for caching for a cache behavior.
+        - ''
+    MinTTL: 0 # This field is deprecated.
+    DefaultTTL: 0 # This field is deprecated.
+    MaxTTL: 0 # This field is deprecated.
+  CacheBehaviors: # A complex type that contains zero or more CacheBehavior elements.
+    Quantity: 0  # [REQUIRED] The number of cache behaviors for this distribution.
+    Items: # Optional.
+    - PathPattern: ''  # [REQUIRED] The pattern (for example, images/*.
+      TargetOriginId: '' # [REQUIRED] The value of ID for the origin that you want CloudFront to route requests to when they match this cache behavior.
+      TrustedSigners: #  We recommend using TrustedKeyGroups instead of TrustedSigners.
+        Enabled: true  # [REQUIRED] This field is true if any of the Amazon Web Services accounts in the list are configured as trusted signers.
+        Quantity: 0 # [REQUIRED] The number of Amazon Web Services accounts in the list.
+        Items: # A list of Amazon Web Services account identifiers.
+        - ''
+      TrustedKeyGroups: # A list of key groups that CloudFront can use to validate signed URLs or signed cookies.
+        Enabled: true  # [REQUIRED] This field is true if any of the key groups in the list have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+        Quantity: 0 # [REQUIRED] The number of key groups in the list.
+        Items: # A list of key groups identifiers.
+        - ''
+      ViewerProtocolPolicy: allow-all # [REQUIRED] The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. Valid values are: allow-all, https-only, redirect-to-https.
+      AllowedMethods: # A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+        Quantity: 0  # [REQUIRED] The number of HTTP methods that you want CloudFront to forward to your origin.
+        Items: # [REQUIRED] A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin.
+        - GET
+        CachedMethods: # A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods.
+          Quantity: 0  # [REQUIRED] The number of HTTP methods for which you want CloudFront to cache responses.
+          Items: # [REQUIRED] A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
+          - GET
+      SmoothStreaming: true # Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
+      Compress: true # Whether you want CloudFront to automatically compress certain files for this cache behavior.
+      LambdaFunctionAssociations: # A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.
+        Quantity: 0  # [REQUIRED] The number of Lambda@Edge function associations for this cache behavior.
+        Items: #  Optional.
+        - LambdaFunctionARN: ''  # [REQUIRED] The ARN of the Lambda@Edge function.
+          EventType: viewer-request # [REQUIRED] Specifies the event type that triggers a Lambda@Edge function invocation. Valid values are: viewer-request, viewer-response, origin-request, origin-response.
+          IncludeBody: true # A flag that allows a Lambda@Edge function to have read access to the body content.
+      FunctionAssociations: # A list of CloudFront functions that are associated with this cache behavior.
+        Quantity: 0  # [REQUIRED] The number of CloudFront functions in the list.
+        Items: # The CloudFront functions that are associated with a cache behavior in a CloudFront distribution.
+        - FunctionARN: ''  # [REQUIRED] The Amazon Resource Name (ARN) of the function.
+          EventType: viewer-request # [REQUIRED] The event type of the function, either viewer-request or viewer-response. Valid values are: viewer-request, viewer-response, origin-request, origin-response.
+      FieldLevelEncryptionId: '' # The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
+      RealtimeLogConfigArn: '' # The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior.
+      CachePolicyId: '' # The unique identifier of the cache policy that is attached to this cache behavior.
+      OriginRequestPolicyId: '' # The unique identifier of the origin request policy that is attached to this cache behavior.
+      ResponseHeadersPolicyId: '' # The identifier for a response headers policy.
+      ForwardedValues: # This field is deprecated.
+        QueryString: true  # [REQUIRED] This field is deprecated.
+        Cookies: # [REQUIRED] This field is deprecated.
+          Forward: none  # [REQUIRED] This field is deprecated. Valid values are: none, whitelist, all.
+          WhitelistedNames: # This field is deprecated.
+            Quantity: 0  # [REQUIRED] The number of cookie names in the Items list.
+            Items: # A list of cookie names.
+            - ''
+        Headers: # This field is deprecated.
+          Quantity: 0  # [REQUIRED] The number of header names in the Items list.
+          Items: # A list of HTTP header names.
+          - ''
+        QueryStringCacheKeys: # This field is deprecated.
+          Quantity: 0  # [REQUIRED] The number of whitelisted query string parameters for a cache behavior.
+          Items: # A list that contains the query string parameters that you want CloudFront to use as a basis for caching for a cache behavior.
+          - ''
+      MinTTL: 0 # This field is deprecated.
+      DefaultTTL: 0 # This field is deprecated.
+      MaxTTL: 0 # This field is deprecated.
+  CustomErrorResponses: # A complex type that controls the following.
+    Quantity: 0  # [REQUIRED] The number of HTTP status codes for which you want to specify a custom error page and/or a caching duration.
+    Items: # A complex type that contains a CustomErrorResponse element for each HTTP status code for which you want to specify a custom error page and/or a caching duration.
+    - ErrorCode: 0  # [REQUIRED] The HTTP status code for which you want to specify a custom error page and/or a caching duration.
+      ResponsePagePath: '' # The path to the custom error page that you want CloudFront to return to a viewer when your origin returns the HTTP status code specified by ErrorCode, for example, /4xx-errors/403-forbidden.
+      ResponseCode: '' # The HTTP status code that you want CloudFront to return to the viewer along with the custom error page.
+      ErrorCachingMinTTL: 0 # The minimum amount of time, in seconds, that you want CloudFront to cache the HTTP status code specified in ErrorCode.
+  Comment: '' # [REQUIRED] A comment to describe the distribution.
+  Logging: # A complex type that controls whether access logs are written for the distribution.
+    Enabled: true  # [REQUIRED] Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket.
+    IncludeCookies: true # [REQUIRED] Specifies whether you want CloudFront to include cookies in access logs, specify true for IncludeCookies.
+    Bucket: '' # [REQUIRED] The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.
+    Prefix: '' # [REQUIRED] An optional string that you want CloudFront to prefix to the access log filenames for this distribution, for example, myprefix/.
+  PriceClass: PriceClass_100 # The price class that corresponds with the maximum price that you want to pay for CloudFront service. Valid values are: PriceClass_100, PriceClass_200, PriceClass_All.
+  Enabled: true # [REQUIRED] From this field, you can enable or disable the selected distribution.
+  ViewerCertificate: # A complex type that determines the distribution's SSL/TLS configuration for communicating with viewers.
+    CloudFrontDefaultCertificate: true  # If the distribution uses the CloudFront domain name such as d111111abcdef8.
+    IAMCertificateId: '' # If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in Identity and Access Management (IAM), provide the ID of the IAM certificate.
+    ACMCertificateArn: '' # If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in Certificate Manager (ACM), provide the Amazon Resource Name (ARN) of the ACM certificate.
+    SSLSupportMethod: sni-only # If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from. Valid values are: sni-only, vip, static-ip.
+    MinimumProtocolVersion: SSLv3 # If the distribution uses Aliases (alternate domain names or CNAMEs), specify the security policy that you want CloudFront to use for HTTPS connections with viewers. Valid values are: SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021.
+    Certificate: '' # This field is deprecated.
+    CertificateSource: cloudfront # This field is deprecated. Valid values are: cloudfront, iam, acm.
+  Restrictions: # A complex type that identifies ways in which you want to restrict distribution of your content.
+    GeoRestriction:  # [REQUIRED] A complex type that controls the countries in which your content is distributed.
+      RestrictionType: blacklist  # [REQUIRED] The method that you want to use to restrict distribution of your content by country. Valid values are: blacklist, whitelist, none.
+      Quantity: 0 # [REQUIRED] When geo restriction is enabled, this is the number of countries in your whitelist or blacklist.
+      Items: # A complex type that contains a Location element for each country in which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist).
+      - ''
+  WebACLId: '' # A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution.
+  HttpVersion: http1.1 # (Optional) Specify the maximum HTTP version(s) that you want viewers to use to communicate with CloudFront. Valid values are: http1.1, http2, http3, http2and3.
+  IsIPV6Enabled: true # If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify true.
+  ContinuousDeploymentPolicyId: '' # The identifier of a continuous deployment policy.
+  Staging: true # A Boolean that indicates whether this is a staging distribution.

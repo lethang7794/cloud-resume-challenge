@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Name of existing S3 bucket
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+
+  MyS3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      PolicyDocument:
+        Id: PolicyForCloudFrontPrivateContent
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal:
+              Service: "cloudfront.amazonaws.com"
+            Action: "s3:GetObject"
+            Resource: !Sub
+              - "arn:aws:s3:::${Bucket}/*"
+              - { Bucket: !Ref MyS3Bucket }
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub
+                  - "arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}"
+                  - { Distribution: !Ref MyCloudFrontDistribution }
+      Bucket: !Ref MyS3Bucket
+
+  MyCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: "A Distribution created with CloudFormation"
+        DefaultRootObject: "index.html"
+        Enabled: true
+        IPV6Enabled: false
+        Origins:
+          - DomainName: !Sub "${S3BucketName}.s3.${AWS::Region}.amazonaws.com" # Do we need to include AWS Region here? https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName
+            Id: !Sub "${S3BucketName}.s3.amazonaws.com"
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+            OriginAccessControlId: !Ref MyOriginAccessControl # THIS DOESN"T WORK !!! OR IT DOES WORK ??? TODO: check again
+        DefaultCacheBehavior:
+          Compress: true
+          MinTTL: 3600
+          TargetOriginId: !Sub "${S3BucketName}.s3.amazonaws.com"
+          ViewerProtocolPolicy: "redirect-to-https"
+          ForwardedValues:
+            QueryString: true
+            Cookies:
+              Forward: all
+
+  MyOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Description: !Sub "${S3BucketName}.s3.amazonaws.com"
+        Name: !Sub "${S3BucketName}.s3.amazonaws.com"
+        OriginAccessControlOriginType: "s3"
+        SigningBehavior: "always"
+        SigningProtocol: "sigv4"

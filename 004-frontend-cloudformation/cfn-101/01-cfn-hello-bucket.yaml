@@ -1,0 +1,4 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/gettingstarted.templatebasics.html#gettingstarted.templatebasics.simple
+Resources:
+  HelloBucket:
+    Type: 'AWS::S3::Bucket'

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation Template For a S3 bucket
+Parameters:
+  BucketNameParam: # A parameter named BucketNameParam of type string
+    Type: String
+Resources:
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketNameParam # Reference the parameter BucketNameParam
+Outputs:
+  BucketArn:
+    Value:
+      Fn::GetAtt:
+        - s3Bucket
+        - Arn

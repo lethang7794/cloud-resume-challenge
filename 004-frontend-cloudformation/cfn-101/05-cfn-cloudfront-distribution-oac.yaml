@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MyCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: "A Distribution created with CloudFormation"
+        DefaultRootObject: "index.html"
+        Enabled: true
+        IPV6Enabled: false
+        Origins:
+          - DomainName: "my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com"
+            Id: "my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com"
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+            OriginAccessControlId: !Ref MyOriginAccessControl
+        DefaultCacheBehavior:
+          Compress: true
+          MinTTL: 3600
+          TargetOriginId: my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com
+          ViewerProtocolPolicy: "redirect-to-https"
+          ForwardedValues:
+            QueryString: true
+            Cookies:
+              Forward: all
+
+  MyOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Description: "my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com"
+        Name: "my-s3-bucket-edtf2cinzi.s3.ap-southeast-1.amazonaws.com"
+        OriginAccessControlOriginType: "s3"
+        SigningBehavior: "always"
+        SigningProtocol: "sigv4"

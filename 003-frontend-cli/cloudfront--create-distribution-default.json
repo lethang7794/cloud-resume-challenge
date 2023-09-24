@@ -1,0 +1,293 @@
+{
+    "DistributionConfig": {
+        "CallerReference": "",
+        "Aliases": {
+            "Quantity": 0,
+            "Items": [
+                ""
+            ]
+        },
+        "DefaultRootObject": "",
+        "Origins": {
+            "Quantity": 0,
+            "Items": [
+                {
+                    "Id": "",
+                    "DomainName": "",
+                    "OriginPath": "",
+                    "CustomHeaders": {
+                        "Quantity": 0,
+                        "Items": [
+                            {
+                                "HeaderName": "",
+                                "HeaderValue": ""
+                            }
+                        ]
+                    },
+                    "S3OriginConfig": {
+                        "OriginAccessIdentity": ""
+                    },
+                    "CustomOriginConfig": {
+                        "HTTPPort": 0,
+                        "HTTPSPort": 0,
+                        "OriginProtocolPolicy": "http-only",
+                        "OriginSslProtocols": {
+                            "Quantity": 0,
+                            "Items": [
+                                "SSLv3"
+                            ]
+                        },
+                        "OriginReadTimeout": 0,
+                        "OriginKeepaliveTimeout": 0
+                    },
+                    "ConnectionAttempts": 0,
+                    "ConnectionTimeout": 0,
+                    "OriginShield": {
+                        "Enabled": true,
+                        "OriginShieldRegion": ""
+                    },
+                    "OriginAccessControlId": ""
+                }
+            ]
+        },
+        "OriginGroups": {
+            "Quantity": 0,
+            "Items": [
+                {
+                    "Id": "",
+                    "FailoverCriteria": {
+                        "StatusCodes": {
+                            "Quantity": 0,
+                            "Items": [
+                                0
+                            ]
+                        }
+                    },
+                    "Members": {
+                        "Quantity": 0,
+                        "Items": [
+                            {
+                                "OriginId": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "DefaultCacheBehavior": {
+            "TargetOriginId": "",
+            "TrustedSigners": {
+                "Enabled": true,
+                "Quantity": 0,
+                "Items": [
+                    ""
+                ]
+            },
+            "TrustedKeyGroups": {
+                "Enabled": true,
+                "Quantity": 0,
+                "Items": [
+                    ""
+                ]
+            },
+            "ViewerProtocolPolicy": "allow-all",
+            "AllowedMethods": {
+                "Quantity": 0,
+                "Items": [
+                    "GET"
+                ],
+                "CachedMethods": {
+                    "Quantity": 0,
+                    "Items": [
+                        "GET"
+                    ]
+                }
+            },
+            "SmoothStreaming": true,
+            "Compress": true,
+            "LambdaFunctionAssociations": {
+                "Quantity": 0,
+                "Items": [
+                    {
+                        "LambdaFunctionARN": "",
+                        "EventType": "viewer-request",
+                        "IncludeBody": true
+                    }
+                ]
+            },
+            "FunctionAssociations": {
+                "Quantity": 0,
+                "Items": [
+                    {
+                        "FunctionARN": "",
+                        "EventType": "viewer-request"
+                    }
+                ]
+            },
+            "FieldLevelEncryptionId": "",
+            "RealtimeLogConfigArn": "",
+            "CachePolicyId": "",
+            "OriginRequestPolicyId": "",
+            "ResponseHeadersPolicyId": "",
+            "ForwardedValues": {
+                "QueryString": true,
+                "Cookies": {
+                    "Forward": "none",
+                    "WhitelistedNames": {
+                        "Quantity": 0,
+                        "Items": [
+                            ""
+                        ]
+                    }
+                },
+                "Headers": {
+                    "Quantity": 0,
+                    "Items": [
+                        ""
+                    ]
+                },
+                "QueryStringCacheKeys": {
+                    "Quantity": 0,
+                    "Items": [
+                        ""
+                    ]
+                }
+            },
+            "MinTTL": 0,
+            "DefaultTTL": 0,
+            "MaxTTL": 0
+        },
+        "CacheBehaviors": {
+            "Quantity": 0,
+            "Items": [
+                {
+                    "PathPattern": "",
+                    "TargetOriginId": "",
+                    "TrustedSigners": {
+                        "Enabled": true,
+                        "Quantity": 0,
+                        "Items": [
+                            ""
+                        ]
+                    },
+                    "TrustedKeyGroups": {
+                        "Enabled": true,
+                        "Quantity": 0,
+                        "Items": [
+                            ""
+                        ]
+                    },
+                    "ViewerProtocolPolicy": "allow-all",
+                    "AllowedMethods": {
+                        "Quantity": 0,
+                        "Items": [
+                            "GET"
+                        ],
+                        "CachedMethods": {
+                            "Quantity": 0,
+                            "Items": [
+                                "GET"
+                            ]
+                        }
+                    },
+                    "SmoothStreaming": true,
+                    "Compress": true,
+                    "LambdaFunctionAssociations": {
+                        "Quantity": 0,
+                        "Items": [
+                            {
+                                "LambdaFunctionARN": "",
+                                "EventType": "viewer-request",
+                                "IncludeBody": true
+                            }
+                        ]
+                    },
+                    "FunctionAssociations": {
+                        "Quantity": 0,
+                        "Items": [
+                            {
+                                "FunctionARN": "",
+                                "EventType": "viewer-request"
+                            }
+                        ]
+                    },
+                    "FieldLevelEncryptionId": "",
+                    "RealtimeLogConfigArn": "",
+                    "CachePolicyId": "",
+                    "OriginRequestPolicyId": "",
+                    "ResponseHeadersPolicyId": "",
+                    "ForwardedValues": {
+                        "QueryString": true,
+                        "Cookies": {
+                            "Forward": "none",
+                            "WhitelistedNames": {
+                                "Quantity": 0,
+                                "Items": [
+                                    ""
+                                ]
+                            }
+                        },
+                        "Headers": {
+                            "Quantity": 0,
+                            "Items": [
+                                ""
+                            ]
+                        },
+                        "QueryStringCacheKeys": {
+                            "Quantity": 0,
+                            "Items": [
+                                ""
+                            ]
+                        }
+                    },
+                    "MinTTL": 0,
+                    "DefaultTTL": 0,
+                    "MaxTTL": 0
+                }
+            ]
+        },
+        "CustomErrorResponses": {
+            "Quantity": 0,
+            "Items": [
+                {
+                    "ErrorCode": 0,
+                    "ResponsePagePath": "",
+                    "ResponseCode": "",
+                    "ErrorCachingMinTTL": 0
+                }
+            ]
+        },
+        "Comment": "",
+        "Logging": {
+            "Enabled": true,
+            "IncludeCookies": true,
+            "Bucket": "",
+            "Prefix": ""
+        },
+        "PriceClass": "PriceClass_100",
+        "Enabled": true,
+        "ViewerCertificate": {
+            "CloudFrontDefaultCertificate": true,
+            "IAMCertificateId": "",
+            "ACMCertificateArn": "",
+            "SSLSupportMethod": "sni-only",
+            "MinimumProtocolVersion": "SSLv3",
+            "Certificate": "",
+            "CertificateSource": "cloudfront"
+        },
+        "Restrictions": {
+            "GeoRestriction": {
+                "RestrictionType": "blacklist",
+                "Quantity": 0,
+                "Items": [
+                    ""
+                ]
+            }
+        },
+        "WebACLId": "",
+        "HttpVersion": "http1.1",
+        "IsIPV6Enabled": true,
+        "ContinuousDeploymentPolicyId": "",
+        "Staging": true
+    }
+}

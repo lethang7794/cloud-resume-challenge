@@ -1,0 +1,45 @@
+# Granting public access to S3 buckets https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples--Granting_public_access_to_S3_buckets
+# References: Creating an Amazon S3 bucket for website hosting and with a DeletionPolicy https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html#scenario-s3-bucket-website
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MyS3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties: # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket-properties
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+  MyS3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject" 
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref MyS3Bucket # Allow every one to access all the objects in `MyS3Bucket` 
+                - /*
+      Bucket: !Ref MyS3Bucket # Apply the policy to `MyS3Bucket` 
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - MyS3Bucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join
+      - ""
+      - - "https://"
+        - !GetAtt
+          - MyS3Bucket
+          - DomainName
+    Description: Name of S3 bucket to hold website content
